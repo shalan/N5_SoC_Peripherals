@@ -6,6 +6,7 @@ typedef unsigned char uint8;
 typedef int int32;
 #endif
 
+//change the following based on your SoC Configuration
 #define UART0_BASE              0x40000000
 #define UART1_BASE              0x40100000
 #define I2C0_BASE               0x40200000
