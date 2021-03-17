@@ -10,4 +10,5 @@ Currenly, it has:
 - APB UART that supports only 8N1 format with the following features:
   - 16-byte TX and RX FIFOs with programmable thresholds
   - 16-bit prescaler (PR) for programable baud rate generation
--
+-  APB Interface for SPI Master Controller by Lane Brooks (Ubixum) 
+-  APB Interface for I2C Master COntroller by Open Cores
