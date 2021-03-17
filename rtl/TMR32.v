@@ -42,15 +42,15 @@
 */
 
 module TMR32 (
-		input   wire            clk,
-		input   wire            rst_n,
-		output  wire    [31:0]  TMR,
+	input   wire            clk,
+	input   wire            rst_n,
+	output  wire    [31:0]  TMR,
         output  wire    [31:0]  CAPTURE,
-		input   wire    [15:0]  PRE,
-		input   wire    [31:0]  CMP,
+	input   wire    [15:0]  PRE,
+	input   wire    [31:0]  CMP,
         input   wire    [31:0]  LOAD,
-		output  wire            OVF,
-		output  wire            CMPF,
+	output  wire            OVF,
+	output  wire            CMPF,
         output  wire            EEVF,        // Trigger event flag for Capture mode.
         input   wire            OVF_CLR,
         input   wire            CMPF_CLR,
