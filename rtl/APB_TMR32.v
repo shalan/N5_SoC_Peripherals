@@ -18,21 +18,6 @@
 	limitations under the License.
 */
 /*
-TMR : 32-bit up counter
-	CMP: Timer CMP register
-	CAPTURE: Capture Register 
-    PRE: 16-bit Clock prescalar (timer_clk = clk / (PRE+1))
-    OVF: Timer overflow (TMR>=CMP)
-	OVF_CLR: Control signal to clear the TMROV flag
-    EN: ENable
-    MODE: 1: Periodic, 0: One-shot
-    UD: Up/Down
-    TC: Timer/Counter
-    CP: Enable Capture Mode
-    PNE: Posedge or Negede - Counter/Capture
-    BE: Both Edges - Counter/Capture
-    PWMEN: PWM Enable
-
     APB Interface for N5 TIMER32 
     APB Registers:
         [0x00]  TMR (R): The Timer current value  
