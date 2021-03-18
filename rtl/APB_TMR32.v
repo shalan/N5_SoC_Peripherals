@@ -134,6 +134,6 @@ module APB_TMR32(
 
     assign PIRQ = |(IM_REG & STATUS_REG);
 
-    assign STATUS_REG = {eevf, cmpf, ovf};;
+    assign STATUS_REG = {eevf, cmpf, ovf};
 
 endmodule
