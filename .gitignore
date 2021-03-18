@@ -53,3 +53,4 @@ dkms.conf
 
 #macOS Specific
 .DS_Store
+*.code-workspace

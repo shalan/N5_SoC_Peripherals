@@ -42,15 +42,15 @@
 */
 
 module TMR32 (
-	input   wire            clk,
-	input   wire            rst_n,
-	output  wire    [31:0]  TMR,
+        input   wire            clk,
+        input   wire            rst_n,
+        output  wire    [31:0]  TMR,
         output  wire    [31:0]  CAPTURE,
-	input   wire    [15:0]  PRE,
-	input   wire    [31:0]  CMP,
+        input   wire    [15:0]  PRE,
+        input   wire    [31:0]  CMP,
         input   wire    [31:0]  LOAD,
-	output  wire            OVF,
-	output  wire            CMPF,
+        output  wire            OVF,
+        output  wire            CMPF,
         output  wire            EEVF,        // Trigger event flag for Capture mode.
         input   wire            OVF_CLR,
         input   wire            CMPF_CLR,
@@ -128,7 +128,7 @@ module TMR32 (
 		if(!rst_n)
 			CNTR <= 'h0;
         else if(!EN)
-            CNTR <= 'h0;
+            CNTR <= CNTR_LOAD;
         else if(ext_event & CP)
             CNTR <= 'h0;
 		else if(tmrov)
@@ -194,6 +194,11 @@ module TMR32 (
     // PWM
     assign PWMPIN = PWMEN & (CNTR>=CMP);
 
+    assign TMR = CNTR;
+    assign OVF = TMROVF;
+    assign CMPF = TMRCMPF;
+    assign EEVF = TMREEVF;
+
 endmodule
 
 
@@ -245,7 +250,7 @@ module TMR32_tb;
 		.EN(EN),
         .MODE(MODE),       // Perioid or One-shot
         .UD(UD),         // Up or Down
-        .TC(TC),         // ????
+        .TC(TC),         // Timer/Counter
         .CP(CP),         // Enable Capture Mode
         .PNE(PNE),        // Posedge or Negede - Counter/Capture
         .BE(BE),         // Both Edges
