@@ -66,7 +66,7 @@ module APB_TMR32(
     `APB_REG(IM_REG,    3, 0, )
     
     reg [2:0] IC_REG;
-    wire IC_REG_sel = (PENABLE & PWRITE & PREADY & PSEL & (PADDR[4:2] == IC_REG_OFF));
+    wire IC_REG_sel = (PENABLE & PWRITE & PREADY & PSEL & (PADDR[7:3] == IC_REG_OFF));
     always @(posedge PCLK, negedge PRESETn)
         if(!PRESETn)
             IC_REG <= 'h0;
@@ -92,6 +92,8 @@ module APB_TMR32(
     wire pne        = CFG_REG[4];
     wire be         = CFG_REG[5];
 
+    assign STATUS_REG = {eevf, cmpf, ovf};
+    
     TMR32 TMR(
 		.clk(PCLK),
 		.rst_n(PRESETn),
@@ -119,9 +121,9 @@ module APB_TMR32(
 	);
 
     assign PRDATA[31:0] =   (PADDR[7:3] == TMR_REG_OFF)     ? {TMR_REG}             :
-                            (PADDR[7:3] == CAP_REG_OFF)     ? {CAP_REG_OFF}         :
+                            (PADDR[7:3] == CAP_REG_OFF)     ? {CAP_REG}             :
                             (PADDR[7:3] == CMP_REG_OFF)     ? {CMP_REG}             :
-                            (PADDR[7:3] == PRE_REG_OFF)     ? {16'd0, PRE_REG_OFF}  :
+                            (PADDR[7:3] == PRE_REG_OFF)     ? {16'd0, PRE_REG}      :
                             (PADDR[7:3] == LOAD_REG_OFF)    ? {LOAD_REG}            :
                             (PADDR[7:3] == CFG_REG_OFF)     ? {26'd0, CFG_REG}      :
                             (PADDR[7:3] == CTRL_REG_OFF)    ? {30'd0, CTRL_REG}     : 
@@ -133,7 +135,5 @@ module APB_TMR32(
     assign PREADY = 1'b1;
 
     assign PIRQ = |(IM_REG & STATUS_REG);
-
-    assign STATUS_REG = {eevf, cmpf, ovf};
 
 endmodule
